@@ -1,8 +1,13 @@
+
 from django.db import models
+# from client.models import Client
 from Admin_.models import Location
 from employee.models import Employee
+
+
 # Create your models here.
 class Client(models.Model):
+    from Admin_.models import Location
     client_name = models.CharField(max_length = 50)
     client_phone = models.CharField(max_length = 50)
     client_email = models.CharField(max_length = 50)
@@ -23,7 +28,7 @@ class Meta:
 
 
 class Work(models.Model):
-    location = models.ForeignKey(Location,on_delete = models.CASCADE)
+    
     date= models.DateField
     worknumber=models.IntegerField
     work_details=models.CharField(max_length = 500)
@@ -32,5 +37,9 @@ class Work(models.Model):
     employee_id=models.ForeignKey(Employee,on_delete = models.CASCADE,default=0)
     cost=models.FloatField
     client=models.ForeignKey(Client,on_delete = models.CASCADE)
+    category=models.ForeignKey(Job_type,on_delete = models.CASCADE)
+    location = models.ForeignKey(Location,on_delete = models.CASCADE)
 class Meta:
     db_table = 'work_tb'
+
+
